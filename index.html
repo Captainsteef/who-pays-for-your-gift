@@ -1517,22 +1517,19 @@ function fadeOutMusic() {
 }
 
 /* ==========================================================
-   Impact button: heart pop, shared counter that adds one per device
+   Impact button: heart pop, shared counter that adds one per page load
    ========================================================== */
 function setupImpact() {
   const btn = $('#impact');
   const out = $('#impact-count');
   const note = $('#impact-note');
   if (!btn) return;
-  const KEY = 'who-pays-impact-v2';
   const API = '/.netlify/functions/impact';
-  let tapped = false;
-  try { tapped = localStorage.getItem(KEY) === '1'; } catch (err) { /* storage can be blocked */ }
+  let tapped = false; // per page load only: a refresh allows one more click
   const done = () => {
     btn.classList.add('is-done');
     note.textContent = 'Thank you for standing against animal testing';
   };
-  if (tapped) done();
   const show = (data) => {
     if (typeof data.count !== 'number') return;
     out.hidden = false;
@@ -1546,7 +1543,6 @@ function setupImpact() {
     btn.classList.add('is-pop');
     if (tapped) return;
     tapped = true;
-    try { localStorage.setItem(KEY, '1'); } catch (err) { /* ignore */ }
     done();
     call('POST');
   });
