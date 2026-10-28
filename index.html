@@ -154,8 +154,6 @@ html.dark body::after { opacity: .06; }
   padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
 }
 .scene--snap { scroll-snap-align: start; }
-/* Last scene: leave room under the footer for the fixed impact button */
-#s7 { padding-bottom: calc(var(--pad-bottom) + 76px); }
 .scene--center { text-align: center; }
 .wrap {
   position: relative; z-index: 1;
@@ -529,12 +527,12 @@ html.dark body::after { opacity: .06; }
 .foot a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ==========================================================
-   Impact button: fixed on screen, shown once the intro is over
+   Impact button: fixed top right, shown once the intro is over
    ========================================================== */
 .impact-wrap {
   position: fixed; z-index: 20;
-  right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom));
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  right: max(10px, env(safe-area-inset-right)); top: calc(env(safe-area-inset-top, 0px) + 10px);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
   /* own GPU layer: stops iOS Safari from dropping the fixed element while the toolbar collapses */
   will-change: transform; -webkit-transform: translateZ(0); transform: translateZ(0);
   opacity: 0; visibility: hidden;
@@ -544,32 +542,31 @@ html:not(.locked) .impact-wrap { opacity: 1; visibility: visible; transition-del
 .impact {
   appearance: none; -webkit-appearance: none;
   display: inline-flex; align-items: center; gap: 8px;
-  height: 44px; padding: 0 6px 0 12px; border-radius: 999px;
+  height: 38px; padding: 0 5px 0 10px; border-radius: 999px;
   background: #000; border: 1.5px solid rgba(255, 255, 255, .38);
-  color: #fff; font: 600 .68rem/1.1 var(--sans); letter-spacing: .01em; text-align: left;
+  color: #fff; font: 600 .6rem/1.1 var(--sans); letter-spacing: .01em; text-align: left;
   cursor: pointer; -webkit-tap-highlight-color: transparent;
   box-shadow: 0 6px 18px rgba(0, 0, 0, .5);
 }
-.impact:active { transform: scale(.97); }
 .impact__note {
-  margin: 0; max-width: 15em; text-align: center;
-  font: 500 .7rem/1.3 var(--sans); color: rgba(255, 255, 255, .85);
+  margin: 0; width: 0; min-width: 100%; text-align: center;
+  font: 500 .6rem/1.25 var(--sans); color: rgba(255, 255, 255, .85);
   text-shadow: 0 1px 3px #000, 0 0 8px rgba(0, 0, 0, .8);
 }
-.impact__logo { display: block; width: 24px; height: 26px; object-fit: contain; flex: none; }
+.impact__logo { display: block; width: 20px; height: 22px; object-fit: contain; flex: none; }
 .impact__text { display: block; max-width: 5.2em; }
 .impact__count {
   display: inline-flex; align-items: center; justify-content: center;
-  min-width: 34px; height: 30px; padding: 0 10px; border-radius: 999px;
-  background: #1f1f22; font-size: .72rem; font-variant-numeric: tabular-nums;
+  min-width: 30px; height: 26px; padding: 0 8px; border-radius: 999px;
+  background: #1f1f22; font-size: .64rem; font-variant-numeric: tabular-nums;
   transition: background .4s var(--ease);
 }
 .impact.is-done .impact__count { background: #0d3b26; }
 .impact__count[hidden] { display: none; }
 .impact.is-pop .impact__logo { animation: impactPop .5s var(--ease); }
 @keyframes impactPop { 0% { transform: scale(1); } 40% { transform: scale(1.22); } 100% { transform: scale(1); } }
-.impact { padding-right: 12px; }
-.impact:has(.impact__count:not([hidden])) { padding-right: 6px; }
+.impact { padding-right: 10px; }
+.impact:has(.impact__count:not([hidden])) { padding-right: 5px; }
 
 /* ==========================================================
    Short screens: small phones with browser bars, and landscape
