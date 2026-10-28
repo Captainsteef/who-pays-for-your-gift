@@ -689,6 +689,7 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
       <p class="t-body rv" data-delay="1800">Brands communicate loudly about their good sides. Information about animal testing is far harder for consumers to find.</p>
       <p class="t-h2 rv" data-delay="2700"><em>If you don't know what's behind a brand, how can you choose consciously?</em></p>
     </div>
+    <button type="button" class="cue rv rv--ui js-only" id="cue-6" data-next="s8" data-delay="3600">Continue<i></i></button>
   </div>
 </section>
 
@@ -1501,7 +1502,7 @@ function setupImpact() {
   const btn = $('#impact');
   const out = $('#impact-count');
   if (!btn) return;
-  const KEY = 'who-pays-impact';
+  const KEY = 'who-pays-impact-v2';
   const API = '/.netlify/functions/impact';
   let tapped = false;
   try { tapped = localStorage.getItem(KEY) === '1'; } catch (err) { /* storage can be blocked */ }
