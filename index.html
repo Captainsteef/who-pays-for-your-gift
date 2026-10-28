@@ -835,11 +835,6 @@ const CONFIG = {
     url: "https://who-pays.netlify.app"
   },
 
-  // Fixed "This made impact" button. count: leave null to hide the number, or set a real total
-  impact: {
-    count: null
-  },
-
   footer: {
     credit: "Made by Zoey van der Sprong Grangeiro"
   }
@@ -1500,22 +1495,23 @@ function fadeOutMusic() {
 }
 
 /* ==========================================================
-   Impact button: heart pop, optional counter that adds one per device
+   Impact button: heart pop, shared counter that adds one per device
    ========================================================== */
 function setupImpact() {
   const btn = $('#impact');
   const out = $('#impact-count');
   if (!btn) return;
-  const total = CONFIG.impact.count;
   const KEY = 'who-pays-impact';
+  const API = '/.netlify/functions/impact';
   let tapped = false;
   try { tapped = localStorage.getItem(KEY) === '1'; } catch (err) { /* storage can be blocked */ }
-  const show = () => {
-    if (typeof total !== 'number') return;
+  const show = (data) => {
+    if (typeof data.count !== 'number') return;
     out.hidden = false;
-    out.textContent = String(total + (tapped ? 1 : 0));
+    out.textContent = String(data.count);
   };
-  show();
+  const call = (method) => fetch(API, { method }).then((r) => r.json()).then(show).catch(() => {});
+  call('GET');
   btn.addEventListener('click', () => {
     btn.classList.remove('is-pop');
     void btn.offsetWidth;
@@ -1523,7 +1519,7 @@ function setupImpact() {
     if (tapped) return;
     tapped = true;
     try { localStorage.setItem(KEY, '1'); } catch (err) { /* ignore */ }
-    show();
+    call('POST');
   });
 }
 
