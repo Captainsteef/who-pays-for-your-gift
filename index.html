@@ -23,7 +23,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;800&family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 
 <style>
 /* ==========================================================
@@ -37,6 +37,7 @@
   --line: rgba(242, 239, 233, .16);
   --accent: #c4252f;
   --accent-text: #e04450;
+  --alert: #f0303c;
   --focus: #ffffff;
 
   /* Scene 0 palette */
@@ -48,6 +49,8 @@
   --champagne: #f4e3b8;
 
   --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  /* Italic text uses a calmer serif than Playfair Display italic, easier to read at small sizes */
+  --serif-italic: 'Lora', Georgia, 'Times New Roman', serif;
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   /* Fluid type scale */
@@ -96,6 +99,7 @@ ul, ol { list-style: none; }
 a { color: var(--ink); text-underline-offset: 3px; }
 button { font: inherit; color: inherit; }
 [hidden] { display: none !important; }
+::selection { background: var(--accent); color: #fff; }
 
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 .scene--lure :focus-visible { outline-color: var(--red); }
@@ -179,6 +183,8 @@ html.dark body::after { opacity: .06; }
 .t-body { font-size: var(--fs-body); color: var(--ink-dim); }
 .t-small { font-size: var(--fs-xs); color: var(--ink-dim); }
 .t-accent { color: var(--accent-text); }
+.t-red { color: var(--alert); }
+em { font-family: var(--serif-italic); }
 
 /* Buttons */
 .btn {
@@ -299,7 +305,7 @@ html.dark body::after { opacity: .06; }
 
 .lure__sub {
   max-width: 20em; margin-inline: auto; color: var(--cocoa);
-  font-family: var(--serif); font-style: italic;
+  font-family: var(--serif-italic); font-style: italic;
   font-size: clamp(1.1rem, 1rem + .8vw, 1.35rem); line-height: 1.35;
 }
 .lure__brands {
@@ -369,13 +375,13 @@ html.dark body::after { opacity: .06; }
   80% { transform: translate(2px, 1px); }
   100% { transform: translate(0); }
 }
-.t-lead2 { font-family: var(--serif); font-style: italic; font-size: var(--fs-lead); line-height: 1.3; color: var(--ink-dim); }
+.t-lead2 { font-family: var(--serif-italic); font-style: italic; font-size: var(--fs-lead); line-height: 1.3; color: var(--ink-dim); }
 .brand {
   font-weight: 600; text-transform: uppercase;
   letter-spacing: .32em; padding-left: .32em;
   font-size: clamp(1.15rem, .9rem + 1.8vw, 1.6rem); line-height: 1.25; margin: .38em 0;
 }
-.brand--more { text-transform: none; letter-spacing: .04em; padding-left: 0; font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink-dim); font-size: var(--fs-lead); }
+.brand--more { text-transform: none; letter-spacing: .04em; padding-left: 0; font-family: var(--serif-italic); font-style: italic; font-weight: 400; color: var(--ink-dim); font-size: var(--fs-lead); }
 .brand-list { margin-bottom: 1.6rem; }
 .t-hero { font-family: var(--serif); font-weight: 500; font-size: var(--fs-display); line-height: 1.12; }
 .t-hero em { font-style: italic; color: var(--accent-text); }
@@ -483,7 +489,7 @@ html.dark body::after { opacity: .06; }
   border: 1px dashed rgba(255, 255, 255, .22); color: var(--ink-dim);
   font: 500 var(--fs-xs)/1.6 var(--sans); letter-spacing: .12em; text-transform: uppercase;
 }
-.dots { position: absolute; top: calc(100% + 6px); left: 0; right: 0; display: flex; justify-content: center; }
+.dots { display: flex; justify-content: center; }
 .dots button {
   width: 32px; height: 32px; padding: 0; display: grid; place-items: center;
   background: none; border: 0; cursor: pointer;
@@ -493,8 +499,8 @@ html.dark body::after { opacity: .06; }
   opacity: .3; transition: opacity .3s, transform .3s;
 }
 .dots button.on::before { opacity: 1; transform: scale(1.3); }
-.thoughts { margin-top: 56px; display: grid; gap: .7rem; }
-.thoughts li { font-family: var(--serif); font-style: italic; font-size: var(--fs-lead); line-height: 1.3; }
+.thoughts { margin-top: 68px; display: grid; gap: .7rem; }
+.thoughts li { font-family: var(--serif-italic); font-style: italic; font-size: var(--fs-lead); line-height: 1.3; }
 
 /* ==========================================================
    Scene 5: the reflection
@@ -509,7 +515,7 @@ html.dark body::after { opacity: .06; }
 .choice[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .reply {
   min-height: 5.5em; margin-top: 22px;
-  font-family: var(--serif); font-style: italic; font-size: var(--fs-lead); line-height: 1.3;
+  font-family: var(--serif-italic); font-style: italic; font-size: var(--fs-lead); line-height: 1.3;
 }
 
 /* ==========================================================
@@ -518,13 +524,33 @@ html.dark body::after { opacity: .06; }
 .app-logo {
   align-self: center; margin-top: .4rem;
   width: min(48vw, 184px, 22dvh); height: auto; aspect-ratio: 1; border-radius: 24%; object-fit: cover;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, .5);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .5), 0 0 0 1px rgba(242, 239, 233, .14), 0 0 0 7px rgba(242, 239, 233, .04);
 }
 .stores { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; width: 100%; }
 .share { display: grid; gap: 14px; margin-top: 28px; }
 .share-fallback { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.foot { margin-top: 36px; display: grid; gap: 6px; font-size: var(--fs-xs); color: rgba(180, 175, 166, .72); }
-.foot a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.foot {
+  margin-top: 44px; display: grid; justify-items: center; gap: 16px; text-align: center;
+  font-size: var(--fs-xs); color: rgba(180, 175, 166, .72);
+}
+.foot::before {
+  content: ""; width: 100%; max-width: 220px; height: 1px; margin-bottom: 8px;
+  background: linear-gradient(90deg, transparent, rgba(242, 239, 233, .28), transparent);
+}
+.foot__note { max-width: 32em; line-height: 1.6; }
+.credit { display: grid; justify-items: center; gap: 5px; }
+.credit__label {
+  padding-left: .3em; font: 500 .62rem/1 var(--sans); letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(180, 175, 166, .6);
+}
+.credit__name { font-family: var(--serif); font-size: var(--fs-xs); letter-spacing: .06em; color: rgba(242, 239, 233, .86); }
+.foot__link {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px 0 18px;
+  border: 1px solid var(--line); border-radius: 999px; text-decoration: none; color: var(--ink-dim);
+  font: 500 .66rem/1 var(--sans); letter-spacing: .2em; text-transform: uppercase;
+  transition: color .2s, border-color .2s;
+}
+.foot__link span { font-size: 1.1em; letter-spacing: 0; }
 
 /* ==========================================================
    Impact button: fixed top right, shown once the intro is over
@@ -569,13 +595,158 @@ html:not(.locked) .impact-wrap { opacity: 1; visibility: visible; transition-del
 .impact:has(.impact__count:not([hidden])) { padding-right: 5px; }
 
 /* ==========================================================
+   Design details: facts, sources, warning, buttons and film
+   ========================================================== */
+.scene--facts::before {
+  content: ""; position: absolute; top: 0; left: 50%; width: 11px; height: 11px;
+  transform: translate(-50%, -50%); background: var(--accent);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+#facts-title::after { content: ""; display: block; width: 36px; height: 2px; margin-top: 16px; background: var(--accent); }
+.facts-intro { display: grid; gap: 1rem; }
+.facts-intro__close {
+  padding-left: 16px; border-left: 2px solid var(--accent);
+  font-family: var(--serif-italic); font-style: italic; font-size: var(--fs-lead); line-height: 1.3; color: var(--ink);
+}
+.facts-intro__src { margin-top: .2rem; padding-top: 12px; border-top: 1px solid var(--line); }
+
+.cards { counter-reset: brand; }
+.card { counter-increment: brand; }
+.card__btn > span:first-child::before {
+  content: counter(brand, decimal-leading-zero); display: inline-block; min-width: 2.6em;
+  font-size: .72em; font-weight: 500; letter-spacing: .12em; color: var(--ink-dim); font-variant-numeric: tabular-nums;
+}
+.card__btn[aria-expanded="true"] .card__icon { color: var(--accent-text); }
+/* The brand name turns red while its card is open */
+.card__btn > span:first-child { transition: color .25s var(--ease); }
+.card__btn[aria-expanded="true"] > span:first-child { color: var(--alert); }
+.card__panel { margin-left: 2px; padding: 2px 2px 20px 16px; border-left: 1px solid var(--accent); }
+
+.sources h3 { display: flex; align-items: center; gap: 14px; }
+.sources h3::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.sources li::marker { color: rgba(180, 175, 166, .6); font-variant-numeric: tabular-nums; }
+.sources a, .card__meta a, .facts-intro__src a {
+  text-decoration-thickness: 1px; text-decoration-color: rgba(242, 239, 233, .35);
+}
+.sources a::after, .card__meta a::after, .facts-intro__src a::after {
+  content: "\2197"; display: inline-block; margin-left: .25em; font-size: .85em; opacity: .7;
+}
+
+.warning::before {
+  content: "Content warning"; color: var(--accent-text);
+  font: 600 .66rem/1 var(--sans); letter-spacing: .24em; text-transform: uppercase;
+}
+
+.btn--primary { box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .12), 0 8px 24px rgba(0, 0, 0, .35); }
+@media (hover: hover) {
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: scale(.98); }
+  .btn--ghost:hover, .choice:hover { border-color: rgba(242, 239, 233, .85); }
+  .sources a:hover, .card__meta a:hover, .facts-intro__src a:hover { text-decoration-color: currentColor; }
+  .foot__link:hover { color: var(--ink); border-color: rgba(242, 239, 233, .5); }
+}
+
+/* Film: poster first, the player loads only after the click */
+/* Scene 3: arrows and an edge chevron make the swipe obvious */
+.scene--swipe .cue { color: var(--ink); }
+.swipe-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 12px; }
+.swipe-nav .step-dots { margin-top: 0; }
+.swipe-arrow {
+  position: relative; flex: none; width: 44px; height: 44px; padding: 0; border-radius: 50%; cursor: pointer;
+  border: 1px solid rgba(242, 239, 233, .45); background: transparent;
+  transition: opacity .3s, border-color .3s;
+}
+.swipe-arrow::before {
+  content: ""; position: absolute; top: 50%; left: 50%; width: 9px; height: 9px;
+  border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+  transform: translate(-35%, -50%) rotate(45deg);
+}
+.swipe-arrow--next::before { transform: translate(-65%, -50%) rotate(225deg); }
+.swipe-arrow--next { border-color: var(--ink); animation: arrow-pulse 2s ease-out infinite; }
+.swipe-arrow:disabled { opacity: .25; cursor: default; }
+@keyframes arrow-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(242, 239, 233, .35); }
+  70%, 100% { box-shadow: 0 0 0 12px rgba(242, 239, 233, 0); }
+}
+.edge-hint {
+  position: absolute; right: 14px; top: 42%; width: 14px; height: 14px; pointer-events: none;
+  border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+  transform: translate(0, -50%) rotate(-45deg); animation: edge-nudge 1.8s ease-in-out infinite;
+  transition: opacity .4s;
+}
+.edge-hint.is-gone { opacity: 0; animation: none; }
+@keyframes edge-nudge {
+  0%, 100% { transform: translate(0, -50%) rotate(-45deg); opacity: .35; }
+  50% { transform: translate(7px, -50%) rotate(-45deg); opacity: 1; }
+}
+.swipe-arrow--next:disabled { animation: none; border-color: rgba(242, 239, 233, .45); }
+
+/* Scene 4: the same arrows under the images */
+.slide-nav {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+}
+.slide-nav .swipe-arrow { width: 40px; height: 40px; }
+
+/* Scene 8: a visible down arrow shows the page continues */
+.cue--more { gap: 12px; color: var(--ink); }
+.cue--more i { display: none; }
+.cue--more::after {
+  content: ""; width: 14px; height: 14px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg); animation: cue-down 1.6s ease-in-out infinite;
+}
+@keyframes cue-down {
+  0%, 100% { transform: translateY(0) rotate(45deg); opacity: .45; }
+  50% { transform: translateY(8px) rotate(45deg); opacity: 1; }
+}
+
+.film { margin-top: 56px; display: grid; gap: 22px; }
+.film__poster, .film__frame {
+  display: block; width: 100%; aspect-ratio: 16 / 9; background: #000;
+  border: 1px solid var(--line); border-radius: 4px;
+}
+.film__poster {
+  position: relative; overflow: hidden; cursor: pointer; text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.film__poster img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .86;
+  transition: opacity .4s var(--ease), transform .6s var(--ease);
+}
+/* Soft vignette so the play button reads on any thumbnail */
+.film__poster::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(60% 70% at 50% 50%, rgba(0, 0, 0, .05), rgba(0, 0, 0, .55));
+}
+/* Fine inner frame, echoing the double frame of the first screen */
+.film__poster::after {
+  content: ""; position: absolute; inset: 8px; z-index: 1; pointer-events: none;
+  border: 1px solid rgba(242, 239, 233, .22);
+}
+.film__play {
+  position: absolute; z-index: 2; top: 50%; left: 50%; width: 68px; height: 68px; margin: -34px 0 0 -34px;
+  display: grid; place-items: center; border-radius: 50%;
+  background: rgba(11, 11, 13, .55); border: 1px solid rgba(242, 239, 233, .7);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  transition: background .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
+}
+.film__play svg { width: 22px; height: 22px; margin-left: 3px; fill: var(--ink); }
+@media (hover: hover) {
+  .film__poster:hover img { opacity: 1; transform: scale(1.03); }
+  .film__poster:hover .film__play { background: var(--accent); border-color: var(--accent); transform: scale(1.06); }
+}
+.film__text { display: grid; gap: 14px; }
+.film__line { font-family: var(--serif-italic); font-style: italic; font-size: var(--fs-lead); line-height: 1.3; color: var(--ink); }
+.film__line em { color: var(--accent-text); }
+
+/* ==========================================================
    Short screens: small phones with browser bars, and landscape
    ========================================================== */
 @media (max-height: 700px) {
   .brand { margin: .25em 0; }
   .brand-list { margin-bottom: 1rem; }
   .zone { height: min(36dvh, 82vw); }
-  .thoughts { margin-top: 44px; gap: .4rem; }
+  .thoughts { margin-top: 60px; gap: .4rem; }
   .app-logo { width: min(40vw, 184px, 17dvh); margin-top: 0; }
   .scene__body { gap: 1rem; }
 }
@@ -620,6 +791,8 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
   .card__panel { animation: none; }
   .btn { transition: none; }
   .btn--lure { animation: none; }
+  .film__poster img, .film__play { transition: none; }
+  .swipe-arrow--next, .edge-hint, .cue--more::after { animation: none; }
 }
 </style>
 </head>
@@ -717,8 +890,13 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
       <p class="line t-display">While you choose what goes under the Christmas tree.</p>
       <p class="line t-display">Now that you know, you might look at it differently.</p>
     </div>
+    <span class="edge-hint js-only" id="edge-hint" aria-hidden="true"></span>
     <div class="swipe-foot">
-      <div class="step-dots" id="step-dots"></div>
+      <div class="swipe-nav">
+        <button type="button" class="swipe-arrow js-only" id="swipe-prev" aria-label="Previous line"></button>
+        <div class="step-dots" id="step-dots"></div>
+        <button type="button" class="swipe-arrow swipe-arrow--next js-only" id="swipe-next" aria-label="Next line"></button>
+      </div>
       <button type="button" class="cue cue--h js-only" id="cue-3">Swipe<i></i></button>
     </div>
   </div>
@@ -735,7 +913,11 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
         </div>
         <div class="carousel" id="carousel" inert role="region" aria-roledescription="carousel" aria-label="Laboratory images" tabindex="0">
           <div class="track" id="track"></div>
-          <div class="dots" id="slide-dots" aria-hidden="true"></div>
+          <div class="slide-nav">
+            <button type="button" class="swipe-arrow" id="slide-prev" aria-label="Previous image"></button>
+            <div class="dots" id="slide-dots" aria-hidden="true"></div>
+            <button type="button" class="swipe-arrow swipe-arrow--next" id="slide-next" aria-label="Next image"></button>
+          </div>
         </div>
       </div>
       <ul class="thoughts" id="thoughts">
@@ -770,10 +952,10 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
   <div class="wrap">
     <!-- EDIT: scene 6 copy -->
     <div class="scene__body">
-      <p class="t-h2 rv" data-delay="0">The problem isn't that you didn't want to know.</p>
-      <p class="t-h2 t-accent rv" data-delay="900">The problem is that you often can't see it.</p>
-      <p class="t-body rv" data-delay="1800">Brands communicate loudly about their good sides. Information about animal testing is far harder for consumers to find.</p>
-      <p class="t-h2 rv" data-delay="2700"><em>If you don't know what's behind a brand, how can you choose consciously?</em></p>
+      <p class="t-h2 rv" data-delay="0">The problem isn't that you don't care.</p>
+      <p class="t-h2 t-red rv" data-delay="900">The problem is that you don't see it.</p>
+      <p class="t-body rv" data-delay="1800">Brands show you their best side. The cruelty behind their products stays hidden.</p>
+      <p class="t-h2 rv" data-delay="2700"><em>If you can't see what's behind a brand, how can you choose cruelty-free?</em></p>
     </div>
     <button type="button" class="cue rv rv--ui js-only" id="cue-6" data-next="s8" data-delay="3600">Continue<i></i></button>
   </div>
@@ -794,7 +976,7 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
       </div>
       <p class="sr-only" id="copy-status" aria-live="polite"></p>
     </div>
-    <button type="button" class="cue rv rv--ui js-only" id="cue-8" data-next="s2" data-delay="1800">More<i></i></button>
+    <button type="button" class="cue cue--more rv rv--ui js-only" id="cue-8" data-next="s2" data-delay="900">Keep scrolling<i></i></button>
   </div>
 </section>
 
@@ -802,19 +984,24 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
 <section class="scene scene--facts" id="s2" data-reveal aria-labelledby="facts-title">
   <div class="wrap">
     <h2 class="t-h2 rv" id="facts-title" data-delay="0">What do we actually know?</h2>
-    <!-- EDIT: nuance paragraph (placeholder text, verify against your sources) -->
-    <p class="t-body rv" data-delay="500">[VERIFY: Animal testing for cosmetics is banned in the EU, but the story is more complicated than yes or no. Some markets have required testing by law, ingredients can be tested under other regulations, parent companies have their own policies, and certifications differ in what they cover. Add your sources.]</p>
+    <!-- EDIT: intro text of the facts section -->
+    <div class="facts-intro rv" data-delay="500">
+      <p class="t-body">Animal testing for cosmetics is banned in the EU, but that doesn't mean animals are safe. Under chemical safety laws, animals can still be used in painful experiments on ingredients found in cosmetics. Outside Europe, countless animals are still tested on, poisoned and killed for beauty products.</p>
+      <p class="t-body">Rabbits, mice and other animals suffer in laboratories for products we use for nothing more than appearance. They have no choice and no voice.</p>
+      <p class="facts-intro__close">Animals shouldn't have to suffer or die just so we can look beautiful. How can beauty be worth so much cruelty?</p>
+      <p class="facts-intro__src t-small">Sources: <a href="https://single-market-economy.ec.europa.eu/sectors/cosmetics/ban-animal-testing_en" target="_blank" rel="noopener noreferrer">European Commission</a>, <a href="https://echa.europa.eu/animal-testing-under-reach" target="_blank" rel="noopener noreferrer">ECHA</a></p>
+    </div>
     <div class="cards rv" id="brand-cards" data-delay="900">
       <noscript>
         <ul>
-          <li>Maybelline: [VERIFY: policy summary for MAYBELLINE, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]</li>
-          <li>MAC: [VERIFY: policy summary for MAC, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]</li>
-          <li>Clinique: [VERIFY: policy summary for CLINIQUE, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]</li>
-          <li>NARS: [VERIFY: policy summary for NARS, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]</li>
-          <li>L'Oreal: [VERIFY: policy summary for L'OREAL, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]</li>
-          <li>Dior: [VERIFY: policy summary for DIOR, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]</li>
-          <li>YSL Beauty: [VERIFY: policy summary for YSL BEAUTY, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]</li>
-          <li>NIVEA: [VERIFY: policy summary for NIVEA, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]</li>
+          <li>Maybelline: Maybelline says it does not test its products or ingredients on animals unless the law requires it, and it follows the policy of its parent company L'Oreal. It is sold in mainland China, where animal testing can be legally required, and Cruelty Free Kitty lists it as not cruelty-free. Sources: <a href="https://www.crueltyfreekitty.com/brands/maybelline/" target="_blank" rel="noopener noreferrer">Cruelty Free Kitty</a>, <a href="https://www.peta.org/faq/is-loreal-cruelty-free/" target="_blank" rel="noopener noreferrer">PETA (parent company L'Oreal)</a></li>
+          <li>MAC: MAC is owned by Estee Lauder. Its own policy says some governments conduct animal testing before they allow cosmetics to be sold, and MAC sells in mainland China. Cruelty Free Kitty lists MAC as not cruelty-free. Sources: <a href="https://www.crueltyfreekitty.com/brands/mac/" target="_blank" rel="noopener noreferrer">Cruelty Free Kitty</a>, <a href="https://logicalharmony.net/?p=41383" target="_blank" rel="noopener noreferrer">Logical Harmony</a></li>
+          <li>Clinique: Clinique, owned by Estee Lauder, says it does not conduct animal testing on its products or ingredients, with an exception where the law requires it. It is sold in mainland China. PETA lists Clinique among the companies that do test on animals, and Cruelty Free Kitty lists it as not cruelty-free. Sources: <a href="https://www.crueltyfreekitty.com/brands/clinique/" target="_blank" rel="noopener noreferrer">Cruelty Free Kitty</a>, <a href="https://crueltyfree.peta.org/companies-do-test/" target="_blank" rel="noopener noreferrer">PETA (companies that do test)</a></li>
+          <li>NARS: NARS, owned by Shiseido, says it does not test on animals or ask others to, except where required by law. It was cruelty-free until it started selling in mainland China in 2017. Cruelty Free Kitty lists NARS as not cruelty-free. Sources: <a href="https://www.crueltyfreekitty.com/brands/nars/" target="_blank" rel="noopener noreferrer">Cruelty Free Kitty</a>, <a href="https://logicalharmony.net/?p=40446" target="_blank" rel="noopener noreferrer">Logical Harmony</a></li>
+          <li>L'Oreal: L'Oreal says it no longer tests its products or ingredients on animals anywhere in the world. PETA keeps it on its list of companies that do test, because it sells cosmetics in mainland China that are legally required to be tested on animals. Cruelty Free Kitty lists it as not cruelty-free. Sources: <a href="https://www.crueltyfreekitty.com/brands/loreal/" target="_blank" rel="noopener noreferrer">Cruelty Free Kitty</a>, <a href="https://www.peta.org/faq/is-loreal-cruelty-free/" target="_blank" rel="noopener noreferrer">PETA</a></li>
+          <li>Dior: Dior, owned by LVMH, says it does not test its products on animals or permit others to do so, except where required by law. It sells in mainland China. Cruelty Free Kitty lists Dior as not cruelty-free. Sources: <a href="https://www.crueltyfreekitty.com/brands/dior/" target="_blank" rel="noopener noreferrer">Cruelty Free Kitty</a>, <a href="https://ethicalelephant.com/?p=3925" target="_blank" rel="noopener noreferrer">Ethical Elephant</a></li>
+          <li>YSL Beauty: YSL Beauty is owned by L'Oreal and follows the L'Oreal animal testing policy. It is sold in mainland China, and Ethical Elephant lists it as not cruelty-free because it allows testing where the law requires it. Sources: <a href="https://ethicalelephant.com/?p=5375" target="_blank" rel="noopener noreferrer">Ethical Elephant</a>, <a href="https://www.crueltyfreekitty.com/brands/loreal/" target="_blank" rel="noopener noreferrer">Cruelty Free Kitty (parent company L'Oreal)</a></li>
+          <li>NIVEA: NIVEA is owned by Beiersdorf, which says it does not test on animals. NIVEA is sold in mainland China, where animal testing can be legally required. PETA lists Beiersdorf among the companies that do test, and Cruelty Free Kitty lists NIVEA as not cruelty-free. Sources: <a href="https://www.crueltyfreekitty.com/brands/nivea/" target="_blank" rel="noopener noreferrer">Cruelty Free Kitty</a>, <a href="https://crueltyfree.peta.org/companies-do-test/" target="_blank" rel="noopener noreferrer">PETA (companies that do test)</a></li>
         </ul>
       </noscript>
     </div>
@@ -842,10 +1029,23 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
     </div>
     <!-- EDIT: footer disclosure and credit line -->
     <footer class="foot rv" data-delay="2400">
-      <p>There's no prize draw. This is a student awareness campaign. No personal data is collected.</p>
-      <p id="credit">Made by Zoey van der Sprong Grangeiro</p>
-      <p><a href="https://www.linkedin.com/in/zoey-vdsg/" target="_blank" rel="noopener noreferrer" aria-label="Zoey van der Sprong Grangeiro on LinkedIn">LinkedIn</a></p>
+      <p class="foot__note">There's no prize draw. This is a student awareness campaign. No personal data is collected.</p>
+      <p class="credit"><span class="credit__label">Made by</span><span class="credit__name" id="credit">Zoey van der Sprong Grangeiro</span></p>
+      <a class="foot__link" href="https://www.linkedin.com/in/zoey-vdsg/" target="_blank" rel="noopener noreferrer" aria-label="Zoey van der Sprong Grangeiro on LinkedIn">LinkedIn <span aria-hidden="true">&#8599;</span></a>
     </footer>
+
+    <!-- EDIT: film below the credit line. The poster is a plain link to YouTube; with JavaScript it opens the player in place -->
+    <section class="film rv" data-delay="2700" aria-labelledby="film-title">
+      <h2 class="sr-only" id="film-title">Save Ralph</h2>
+      <a class="film__poster" id="film-play" href="https://youtu.be/G393z8s8nFY" target="_blank" rel="noopener" data-video="G393z8s8nFY" data-title="Save Ralph" aria-label="Play the film Save Ralph">
+        <img src="https://i.ytimg.com/vi/G393z8s8nFY/hqdefault.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.hidden=true">
+        <span class="film__play" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+      </a>
+      <div class="film__text">
+        <p class="t-body">Save Ralph is a short film that shows the cruel reality of animal testing through the eyes of Ralph, a rabbit used for cosmetic experiments. His story may be fictional, but the suffering of animals like him is real. The video exposes the hidden cruelty behind beauty products and reminds us that animals are not test subjects. They are living beings who feel pain, fear and suffering.</p>
+        <p class="film__line">Ralph is fictional. <em>The cruelty is not.</em></p>
+      </div>
+    </section>
   </div>
 </section>
 
@@ -872,16 +1072,80 @@ const CONFIG = {
   },
 
   // Brand data. "name" is shown in scene 0, scene 1 (uppercased) and scene 2.
-  // Replace every [VERIFY ...] placeholder with a sourced statement and a real link.
+  // Each brand has a short summary, the date it was last checked and the sources behind the summary.
   brands: [
-    { name: "Maybelline", summary: "[VERIFY: policy summary for MAYBELLINE, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]", lastChecked: "[VERIFY: date]", sourceLabel: "[VERIFY: source name]", sourceUrl: "https://example.com/" },
-    { name: "MAC", summary: "[VERIFY: policy summary for MAC, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]", lastChecked: "[VERIFY: date]", sourceLabel: "[VERIFY: source name]", sourceUrl: "https://example.com/" },
-    { name: "Clinique", summary: "[VERIFY: policy summary for CLINIQUE, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]", lastChecked: "[VERIFY: date]", sourceLabel: "[VERIFY: source name]", sourceUrl: "https://example.com/" },
-    { name: "NARS", summary: "[VERIFY: policy summary for NARS, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]", lastChecked: "[VERIFY: date]", sourceLabel: "[VERIFY: source name]", sourceUrl: "https://example.com/" },
-    { name: "L'Oreal", summary: "[VERIFY: policy summary for L'OREAL, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]", lastChecked: "[VERIFY: date]", sourceLabel: "[VERIFY: source name]", sourceUrl: "https://example.com/" },
-    { name: "Dior", summary: "[VERIFY: policy summary for DIOR, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]", lastChecked: "[VERIFY: date]", sourceLabel: "[VERIFY: source name]", sourceUrl: "https://example.com/" },
-    { name: "YSL Beauty", summary: "[VERIFY: policy summary for YSL BEAUTY, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]", lastChecked: "[VERIFY: date]", sourceLabel: "[VERIFY: source name]", sourceUrl: "https://example.com/" },
-    { name: "NIVEA", summary: "[VERIFY: policy summary for NIVEA, source: Leaping Bunny / PETA / Cruelty Free Kitty / official brand statement]", lastChecked: "[VERIFY: date]", sourceLabel: "[VERIFY: source name]", sourceUrl: "https://example.com/" }
+    {
+      name: "Maybelline",
+      summary: "Maybelline says it does not test its products or ingredients on animals unless the law requires it, and it follows the policy of its parent company L'Oreal. It is sold in mainland China, where animal testing can be legally required, and Cruelty Free Kitty lists it as not cruelty-free.",
+      lastChecked: "9 November 2026",
+      sources: [
+        { label: "Cruelty Free Kitty", url: "https://www.crueltyfreekitty.com/brands/maybelline/" },
+        { label: "PETA (parent company L'Oreal)", url: "https://www.peta.org/faq/is-loreal-cruelty-free/" }
+      ]
+    },
+    {
+      name: "MAC",
+      summary: "MAC is owned by Estee Lauder. Its own policy says some governments conduct animal testing before they allow cosmetics to be sold, and MAC sells in mainland China. Cruelty Free Kitty lists MAC as not cruelty-free.",
+      lastChecked: "9 November 2026",
+      sources: [
+        { label: "Cruelty Free Kitty", url: "https://www.crueltyfreekitty.com/brands/mac/" },
+        { label: "Logical Harmony", url: "https://logicalharmony.net/?p=41383" }
+      ]
+    },
+    {
+      name: "Clinique",
+      summary: "Clinique, owned by Estee Lauder, says it does not conduct animal testing on its products or ingredients, with an exception where the law requires it. It is sold in mainland China. PETA lists Clinique among the companies that do test on animals, and Cruelty Free Kitty lists it as not cruelty-free.",
+      lastChecked: "9 November 2026",
+      sources: [
+        { label: "Cruelty Free Kitty", url: "https://www.crueltyfreekitty.com/brands/clinique/" },
+        { label: "PETA (companies that do test)", url: "https://crueltyfree.peta.org/companies-do-test/" }
+      ]
+    },
+    {
+      name: "NARS",
+      summary: "NARS, owned by Shiseido, says it does not test on animals or ask others to, except where required by law. It was cruelty-free until it started selling in mainland China in 2017. Cruelty Free Kitty lists NARS as not cruelty-free.",
+      lastChecked: "9 November 2026",
+      sources: [
+        { label: "Cruelty Free Kitty", url: "https://www.crueltyfreekitty.com/brands/nars/" },
+        { label: "Logical Harmony", url: "https://logicalharmony.net/?p=40446" }
+      ]
+    },
+    {
+      name: "L'Oreal",
+      summary: "L'Oreal says it no longer tests its products or ingredients on animals anywhere in the world. PETA keeps it on its list of companies that do test, because it sells cosmetics in mainland China that are legally required to be tested on animals. Cruelty Free Kitty lists it as not cruelty-free.",
+      lastChecked: "9 November 2026",
+      sources: [
+        { label: "Cruelty Free Kitty", url: "https://www.crueltyfreekitty.com/brands/loreal/" },
+        { label: "PETA", url: "https://www.peta.org/faq/is-loreal-cruelty-free/" }
+      ]
+    },
+    {
+      name: "Dior",
+      summary: "Dior, owned by LVMH, says it does not test its products on animals or permit others to do so, except where required by law. It sells in mainland China. Cruelty Free Kitty lists Dior as not cruelty-free.",
+      lastChecked: "9 November 2026",
+      sources: [
+        { label: "Cruelty Free Kitty", url: "https://www.crueltyfreekitty.com/brands/dior/" },
+        { label: "Ethical Elephant", url: "https://ethicalelephant.com/?p=3925" }
+      ]
+    },
+    {
+      name: "YSL Beauty",
+      summary: "YSL Beauty is owned by L'Oreal and follows the L'Oreal animal testing policy. It is sold in mainland China, and Ethical Elephant lists it as not cruelty-free because it allows testing where the law requires it.",
+      lastChecked: "9 November 2026",
+      sources: [
+        { label: "Ethical Elephant", url: "https://ethicalelephant.com/?p=5375" },
+        { label: "Cruelty Free Kitty (parent company L'Oreal)", url: "https://www.crueltyfreekitty.com/brands/loreal/" }
+      ]
+    },
+    {
+      name: "NIVEA",
+      summary: "NIVEA is owned by Beiersdorf, which says it does not test on animals. NIVEA is sold in mainland China, where animal testing can be legally required. PETA lists Beiersdorf among the companies that do test, and Cruelty Free Kitty lists NIVEA as not cruelty-free.",
+      lastChecked: "9 November 2026",
+      sources: [
+        { label: "Cruelty Free Kitty", url: "https://www.crueltyfreekitty.com/brands/nivea/" },
+        { label: "PETA (companies that do test)", url: "https://crueltyfree.peta.org/companies-do-test/" }
+      ]
+    }
   ],
 
   // General sources shown at the top of the source list in scene 2
@@ -889,7 +1153,8 @@ const CONFIG = {
     { label: "Leaping Bunny Programme", url: "https://www.leapingbunny.org/" },
     { label: "PETA, Beauty Without Bunnies", url: "https://crueltyfree.peta.org/" },
     { label: "Cruelty Free Kitty", url: "https://www.crueltyfreekitty.com/" },
-    { label: "[VERIFY: official source for the EU cosmetics testing ban and its exceptions]", url: "https://example.com/" }
+    { label: "European Commission, EU ban on animal testing for cosmetics", url: "https://single-market-economy.ec.europa.eu/sectors/cosmetics/ban-animal-testing_en" },
+    { label: "ECHA, animal testing under REACH", url: "https://echa.europa.eu/animal-testing-under-reach" }
   ],
 
   // Scene 4 media slots (3 to 5). Leave "src" empty to show a labelled placeholder.
@@ -923,7 +1188,7 @@ const CONFIG = {
   },
 
   footer: {
-    credit: "Made by Zoey van der Sprong Grangeiro"
+    credit: "Zoey van der Sprong Grangeiro"
   }
 };
 /* ==================== end of CONFIG ==================== */
@@ -948,6 +1213,15 @@ function el(tag, attrs, children) {
   return node;
 }
 const link = (label, url) => el('a', { href: url, target: '_blank', rel: 'noopener noreferrer', text: label });
+// "Sources: label, label" with one link per source
+function sourceLinks(sources, prefix) {
+  const node = el('span', {}, prefix ? [prefix] : []);
+  sources.forEach((s, i) => {
+    if (i) node.append(', ');
+    node.append(link(s.label, s.url));
+  });
+  return node;
+}
 
 const state = { locked: true, scene: 0, introProgress: 0 };
 
@@ -1089,7 +1363,7 @@ function renderAccordion() {
       el('p', { text: b.summary }),
       el('div', { class: 'card__meta' }, [
         el('span', { text: 'Last checked: ' + b.lastChecked }),
-        link('Source: ' + b.sourceLabel, b.sourceUrl)
+        sourceLinks(b.sources, 'Sources: ')
       ])
     ]);
     panel.hidden = !open;
@@ -1105,7 +1379,7 @@ function renderAccordion() {
 function renderSources() {
   const list = $('#source-list');
   CONFIG.generalSources.forEach((s) => list.append(el('li', {}, [link(s.label, s.url)])));
-  CONFIG.brands.forEach((b) => list.append(el('li', {}, [b.name + ': ', link(b.sourceLabel, b.sourceUrl)])));
+  CONFIG.brands.forEach((b) => list.append(el('li', {}, [b.name + ': ', sourceLinks(b.sources)])));
 }
 
 function renderMedia() {
@@ -1254,6 +1528,8 @@ const s3Lines = $$('.line', linesTrack);
 const cue3 = $('#cue-3');
 let s3Index = 0;
 let s3Dots = [];
+let s3Prev = null;
+let s3Edge = null;
 
 function goToLine(i) {
   const target = Math.min(s3Lines.length - 1, Math.max(0, i));
@@ -1272,10 +1548,14 @@ function markLine(index) {
   const last = index === s3Lines.length - 1;
   cue3.classList.toggle('cue--h', !last);
   cue3.firstChild.nodeValue = last ? 'Continue' : 'Swipe';
+  if (s3Prev) s3Prev.disabled = index === 0;
+  if (s3Edge) s3Edge.classList.toggle('is-gone', last);
 }
 
 function setupLines() {
   const host = $('#step-dots');
+  s3Prev = $('#swipe-prev');
+  s3Edge = $('#edge-hint');
   s3Dots = s3Lines.map((_, i) => {
     const dot = el('button', { type: 'button', 'aria-label': 'Line ' + (i + 1) + ' of ' + s3Lines.length });
     dot.addEventListener('click', () => goToLine(i));
@@ -1298,6 +1578,8 @@ function setupLines() {
   // A tap moves to the next line; after the last line it moves on to the next scene
   linesTrack.addEventListener('click', goNextLine);
   cue3.addEventListener('click', goNextLine);
+  s3Prev.addEventListener('click', () => goToLine(s3Index - 1));
+  $('#swipe-next').addEventListener('click', goNextLine);
   linesTrack.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') { e.preventDefault(); goToLine(s3Index + 1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); goToLine(s3Index - 1); }
@@ -1342,8 +1624,16 @@ function startAuto() {
 
 function setupCarousel() {
   const dots = $$('button', $('#slide-dots'));
-  const markDot = () => dots.forEach((dot, i) => dot.classList.toggle('on', i === slideIndex));
+  const prev = $('#slide-prev');
+  const next = $('#slide-next');
+  const markDot = () => {
+    dots.forEach((dot, i) => dot.classList.toggle('on', i === slideIndex));
+    prev.disabled = slideIndex <= 0;
+    next.disabled = slideIndex >= track.children.length - 1;
+  };
   markDot();
+  prev.addEventListener('click', () => { userTouched = true; goToSlide(Math.max(0, slideIndex - 1)); });
+  next.addEventListener('click', () => { userTouched = true; goToSlide(Math.min(track.children.length - 1, slideIndex + 1)); });
 
   let pending = false;
   track.addEventListener('scroll', () => {
@@ -1505,6 +1795,29 @@ function setupShare() {
 }
 
 /* ==========================================================
+   Film: the poster opens the YouTube player in place
+   ========================================================== */
+function setupFilm() {
+  const poster = $('#film-play');
+  if (!poster) return;
+  // YouTube refuses to play inside a page opened straight from disk (no origin), so the link opens YouTube instead
+  if (location.protocol === 'file:') return;
+  poster.addEventListener('click', (e) => {
+    e.preventDefault();
+    const frame = el('iframe', {
+      class: 'film__frame',
+      src: 'https://www.youtube-nocookie.com/embed/' + poster.dataset.video + '?autoplay=1&rel=0&playsinline=1',
+      title: poster.dataset.title,
+      allow: 'autoplay; encrypted-media; picture-in-picture; fullscreen',
+      allowfullscreen: '',
+      referrerpolicy: 'strict-origin-when-cross-origin'
+    });
+    poster.replaceWith(frame);
+    frame.focus();
+  });
+}
+
+/* ==========================================================
    Background music: starts on the first tap, fades out at the first scroll cue
    ========================================================== */
 const music = { el: null, ctx: null, gain: null, playing: false, stopped: false, failed: false };
@@ -1598,10 +1911,17 @@ function setupImpact() {
     btn.classList.add('is-done');
     note.textContent = 'Thank you for standing against animal testing';
   };
-  const show = (data) => {
-    if (typeof data.count !== 'number') return;
+  let count = null; // null until the first number is known
+  const render = () => {
     out.hidden = false;
-    out.textContent = String(data.count);
+    out.textContent = count.toLocaleString('en');
+  };
+  const show = (data) => {
+    if (!data || typeof data.count !== 'number') return;
+    // A late answer that does not include this visitor's own click is ignored
+    if (count !== null && data.count < count) return;
+    count = data.count;
+    render();
   };
   const call = (method) => fetch(API, { method }).then((r) => r.json()).then(show).catch(() => {});
   call('GET');
@@ -1612,6 +1932,9 @@ function setupImpact() {
     if (tapped) return;
     tapped = true;
     done();
+    // The number goes up at once; the server answer replaces it
+    count = (count === null ? 0 : count) + 1;
+    render();
     call('POST');
   });
 }
@@ -1655,6 +1978,7 @@ function init() {
   setupReflection();
   setupApp();
   setupShare();
+  setupFilm();
   setupCues();
   setupImpact();
   setupMusic();
