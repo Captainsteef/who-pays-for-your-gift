@@ -85,7 +85,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100svh;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--sans);
@@ -153,7 +153,7 @@ html.dark body::after { opacity: .06; }
 .scene {
   position: relative;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100svh;
   display: flex; flex-direction: column;
   padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
 }
@@ -261,20 +261,20 @@ em { font-family: var(--serif-italic); }
   50% { opacity: .5; transform: scale(1); }
 }
 
-.scene--lure .scene__body { gap: clamp(10px, 2.2dvh, 20px); }
-.scene--lure .scene__actions { margin-top: 0; padding-top: clamp(8px, 1.6dvh, 16px); }
+.scene--lure .scene__body { gap: clamp(10px, 2.2svh, 20px); }
+.scene--lure .scene__actions { margin-top: 0; padding-top: clamp(8px, 1.6svh, 16px); }
 
 /* Gift on a soft round backdrop with fine rings */
-.gift-wrap { position: relative; display: flex; justify-content: center; align-items: center; padding-block: 14px; min-height: calc(min(64vw, 240px, 28dvh) + 28px); }
+.gift-wrap { position: relative; display: flex; justify-content: center; align-items: center; padding-block: 14px; min-height: calc(min(64vw, 240px, 28svh) + 28px); }
 .gift-wrap::before {
   content: ""; position: absolute; border-radius: 50%; aspect-ratio: 1;
-  width: min(64vw, 240px, 28dvh);
+  width: min(64vw, 240px, 28svh);
   background: radial-gradient(circle at 50% 38%, #ffffff 0%, var(--blush-1) 58%, var(--blush-2) 100%);
   box-shadow: 0 0 0 1px rgba(104, 29, 53, .18), 0 0 0 10px rgba(255, 255, 255, .45), 0 0 0 11px rgba(104, 29, 53, .1);
 }
 .gift {
   position: relative;
-  width: min(54vw, 210px, 24dvh); height: auto; object-fit: contain;
+  width: min(54vw, 210px, 24svh); height: auto; object-fit: contain;
   filter: drop-shadow(0 10px 16px rgba(74, 15, 36, .25));
   animation: float 5s ease-in-out infinite;
 }
@@ -336,9 +336,9 @@ em { font-family: var(--serif-italic); }
 
 /* Short screens: small phones with browser bars */
 @media (max-height: 700px) {
-  .gift { width: min(44vw, 210px, 19dvh); }
-  .gift-wrap { padding-block: 10px; min-height: calc(min(54vw, 240px, 23dvh) + 26px); }
-  .gift-wrap::before { width: min(54vw, 240px, 23dvh); }
+  .gift { width: min(44vw, 210px, 19svh); }
+  .gift-wrap { padding-block: 10px; min-height: calc(min(54vw, 240px, 23svh) + 26px); }
+  .gift-wrap::before { width: min(54vw, 240px, 23svh); }
   .scene--lure .scene__body { gap: 10px; }
   .lure__title { font-size: clamp(1.8rem, 1.1rem + 4vw, 2.6rem); }
   .lure__sub { font-size: 1.05rem; }
@@ -349,8 +349,8 @@ em { font-family: var(--serif-italic); }
   .scene--lure::before { inset: 6px; }
   .scene--lure::after, .gift-wrap::before, .lure__eyebrow, .lure__rule { display: none; }
   .gift-wrap { min-height: 0; }
-  .gift { width: min(54vw, 210px, 20dvh); }
-  .lure__title { font-size: clamp(1.5rem, 8dvh, 2.2rem); }
+  .gift { width: min(54vw, 210px, 20svh); }
+  .lure__title { font-size: clamp(1.5rem, 8svh, 2.2rem); }
   .lure__title em { display: inline; }
   .lure__sub { font-size: 1.05rem; }
   .lure__brands { padding-block: 6px; line-height: 1.4; }
@@ -462,7 +462,7 @@ em { font-family: var(--serif-italic); }
 /* ==========================================================
    Scene 4: the images
    ========================================================== */
-.zone { position: relative; width: 100%; height: min(46vh, 82vw); height: min(46dvh, 82vw); }
+.zone { position: relative; width: 100%; height: min(46vh, 82vw); height: min(46svh, 82vw); }
 .warning {
   position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px;
   padding: 22px; border: 1px solid var(--line); background: var(--bg-raise);
@@ -523,7 +523,7 @@ em { font-family: var(--serif-italic); }
    ========================================================== */
 .app-logo {
   align-self: center; margin-top: .4rem;
-  width: min(48vw, 184px, 22dvh); height: auto; aspect-ratio: 1; border-radius: 24%; object-fit: cover;
+  width: min(48vw, 184px, 22svh); height: auto; aspect-ratio: 1; border-radius: 24%; object-fit: cover;
   box-shadow: 0 10px 28px rgba(0, 0, 0, .5), 0 0 0 1px rgba(242, 239, 233, .14), 0 0 0 7px rgba(242, 239, 233, .04);
 }
 .stores { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; width: 100%; }
@@ -646,6 +646,43 @@ html:not(.locked) .impact-wrap { opacity: 1; visibility: visible; transition-del
   .foot__link:hover { color: var(--ink); border-color: rgba(242, 239, 233, .5); }
 }
 
+/* Floating scroll hint: shown while the current section continues below the screen */
+.more {
+  position: fixed; z-index: 20; left: 0; right: 0; bottom: 0;
+  height: calc(120px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 6px);
+  display: flex; align-items: flex-end; justify-content: center;
+  background: linear-gradient(to top, rgba(11, 11, 13, 1) 0%, rgba(11, 11, 13, .97) 42%, rgba(11, 11, 13, 0) 100%);
+  pointer-events: none;
+  will-change: transform; -webkit-transform: translateZ(0); transform: translateZ(0);
+  opacity: 0; visibility: hidden;
+  transition: opacity .4s var(--ease), visibility 0s .4s;
+}
+.more.is-on { opacity: 1; visibility: visible; transition-delay: 0s, 0s; }
+.more__btn {
+  appearance: none; -webkit-appearance: none; pointer-events: auto;
+  display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
+  min-height: 52px; padding: 8px 20px 8px calc(20px + .22em);
+  background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  color: var(--ink); font: 600 .72rem/1 var(--sans); letter-spacing: .22em; text-transform: uppercase;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .9);
+}
+.more__btn::after {
+  content: ""; width: 14px; height: 14px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg); animation: cue-down 1.6s ease-in-out infinite;
+}
+
+/* Scene 2: tells the visitor the brand rows can be opened */
+.cards-hint {
+  display: flex; align-items: center; gap: 10px; margin-top: .2rem;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink);
+}
+.cards-hint::after {
+  content: ""; flex: none; width: 8px; height: 8px;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+}
+
 /* Film: poster first, the player loads only after the click */
 /* Scene 3: arrows and an edge chevron make the swipe obvious */
 .scene--swipe .cue { color: var(--ink); }
@@ -688,10 +725,10 @@ html:not(.locked) .impact-wrap { opacity: 1; visibility: visible; transition-del
 }
 .slide-nav .swipe-arrow { width: 40px; height: 40px; }
 
-/* Scene 8: a visible down arrow shows the page continues */
-.cue--more { gap: 12px; color: var(--ink); }
-.cue--more i { display: none; }
-.cue--more::after {
+/* Every vertical cue: a visible down arrow shows the page continues */
+.cue:not(.cue--h) { gap: 12px; color: var(--ink); }
+.cue:not(.cue--h) i { display: none; }
+.cue:not(.cue--h)::after {
   content: ""; width: 14px; height: 14px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
   transform: rotate(45deg); animation: cue-down 1.6s ease-in-out infinite;
 }
@@ -745,9 +782,9 @@ html:not(.locked) .impact-wrap { opacity: 1; visibility: visible; transition-del
 @media (max-height: 700px) {
   .brand { margin: .25em 0; }
   .brand-list { margin-bottom: 1rem; }
-  .zone { height: min(36dvh, 82vw); }
+  .zone { height: min(36svh, 82vw); }
   .thoughts { margin-top: 60px; gap: .4rem; }
-  .app-logo { width: min(40vw, 184px, 17dvh); margin-top: 0; }
+  .app-logo { width: min(40vw, 184px, 17svh); margin-top: 0; }
   .scene__body { gap: 1rem; }
 }
 @media (max-height: 520px) {
@@ -755,8 +792,8 @@ html:not(.locked) .impact-wrap { opacity: 1; visibility: visible; transition-del
   .wrap { max-width: 640px; }
   .brand-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1rem; margin-bottom: .8rem; }
   .brand { font-size: .95rem; margin: .1em 0; }
-  .t-display { font-size: clamp(1.7rem, 9dvh, 2.4rem); }
-  .zone { height: 40dvh; }
+  .t-display { font-size: clamp(1.7rem, 9svh, 2.4rem); }
+  .zone { height: 40svh; }
 }
 
 /* ==========================================================
@@ -785,6 +822,8 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
   .sparkle { animation: none; opacity: .55; }
   .gift { animation: none; }
   .cue i { animation: none; opacity: .6; transform: none; }
+  .more { transition: opacity .3s linear, visibility 0s .3s; }
+  .more__btn::after { animation: none; }
   .lure__timer { display: none; }
   #line1.glitch { animation: none; }
   .card__icon::before, .card__icon::after { transition: none; }
@@ -792,7 +831,7 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
   .btn { transition: none; }
   .btn--lure { animation: none; }
   .film__poster img, .film__play { transition: none; }
-  .swipe-arrow--next, .edge-hint, .cue--more::after { animation: none; }
+  .swipe-arrow--next, .edge-hint, .cue:not(.cue--h)::after { animation: none; }
 }
 </style>
 </head>
@@ -817,6 +856,11 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
   <span class="impact__count" id="impact-count" hidden></span>
 </button>
 <p class="impact__note" id="impact-note" aria-live="polite">Click to show you care</p>
+</div>
+
+<!-- Scroll hint: appears while the current section continues below the screen -->
+<div class="more js-only" id="more">
+  <button type="button" class="more__btn" id="more-btn">Scroll for more</button>
 </div>
 
 <!-- SCENE 0: the lure -->
@@ -991,6 +1035,7 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
       <p class="facts-intro__close">Animals shouldn't have to suffer or die just so we can look beautiful. How can beauty be worth so much cruelty?</p>
       <p class="facts-intro__src t-small">Sources: <a href="https://single-market-economy.ec.europa.eu/sectors/cosmetics/ban-animal-testing_en" target="_blank" rel="noopener noreferrer">European Commission</a>, <a href="https://echa.europa.eu/animal-testing-under-reach" target="_blank" rel="noopener noreferrer">ECHA</a></p>
     </div>
+    <p class="cards-hint t-small rv js-only" data-delay="800">Tap a brand to see what we found</p>
     <div class="cards rv" id="brand-cards" data-delay="900">
       <noscript>
         <ul>
@@ -1009,6 +1054,7 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
       <h3>Sources</h3>
       <ol id="source-list"></ol>
     </div>
+    <button type="button" class="cue rv rv--ui js-only" id="cue-2" data-next="s7" data-delay="1100">Keep scrolling<i></i></button>
   </div>
 </section>
 
@@ -1025,7 +1071,6 @@ html:not(.js) .scene--lure noscript { color: var(--red-deep); }
       <!-- The href is replaced from CONFIG when JavaScript runs; this value serves visitors without it -->
       <a class="btn btn--primary btn--xl" id="get-app" href="https://bunnysearch.app/" target="_blank" rel="noopener">Get Bunny Search</a>
       <div class="stores" id="stores" hidden></div>
-      <p class="t-small">Check it in the store, before the checkout.</p>
     </div>
     <!-- EDIT: footer disclosure and credit line -->
     <footer class="foot rv" data-delay="2400">
@@ -1280,6 +1325,35 @@ function observeScenes() {
   $$('[data-reveal]').forEach((scene) => { if (scene.id !== 's0') io.observe(scene); });
 }
 
+/* ---------- scroll hint: shown while the section on screen continues below the fold ---------- */
+const moreHint = $('#more');
+const flowScenes = ['s1', 's3', 's4', 's5', 's6', 's8', 's2', 's7']
+  .map((id) => document.getElementById(id))
+  .filter(Boolean);
+function updateMore() {
+  if (!moreHint) return;
+  let show = false;
+  if (!state.locked) {
+    const left = root.scrollHeight - (window.scrollY + window.innerHeight);
+    if (left > 24) {
+      const mid = window.innerHeight / 2;
+      const current = flowScenes.find((scene) => {
+        const r = scene.getBoundingClientRect();
+        return r.top <= mid && r.bottom > mid;
+      });
+      show = !!current && current.getBoundingClientRect().bottom > window.innerHeight + 48;
+    }
+  }
+  moreHint.classList.toggle('is-on', show);
+}
+function setupMore() {
+  if (!moreHint) return;
+  $('#more-btn').addEventListener('click', () => {
+    window.scrollBy({ top: Math.round(window.innerHeight * 0.8), behavior: prefersReduced() ? 'auto' : 'smooth' });
+  });
+  window.addEventListener('resize', updateMore);
+}
+
 /* ---------- progress bar ---------- */
 const bar = $('#progress-bar');
 function updateProgress() {
@@ -1371,6 +1445,7 @@ function renderAccordion() {
       const isOpen = button.getAttribute('aria-expanded') === 'true';
       button.setAttribute('aria-expanded', String(!isOpen));
       panel.hidden = isOpen;
+      requestAnimationFrame(updateMore);
     });
     host.append(el('div', { class: 'card' }, [el('h3', {}, [button]), panel]));
   });
@@ -1487,6 +1562,7 @@ async function runSwitch() {
   root.classList.remove('locked');
   state.locked = false;
   updateProgress();
+  updateMore();
   revealIn([$('#cue-1')]);
 }
 
@@ -1980,6 +2056,7 @@ function init() {
   setupShare();
   setupFilm();
   setupCues();
+  setupMore();
   setupImpact();
   setupMusic();
   observeScenes();
@@ -2000,6 +2077,7 @@ function init() {
     requestAnimationFrame(() => {
       ticking = false;
       updateProgress();
+      updateMore();
       if (!state.locked && window.scrollY > window.innerHeight * 0.4) fadeOutMusic();
     });
   }, { passive: true });
